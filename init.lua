@@ -19,3 +19,14 @@ vim.keymap.set('v', '<Leader>y', '"+y', { desc = 'yank into system register' })
 vim.keymap.set('v', '<Leader>x', '"+x', { desc = 'cut into system register' })
 vim.keymap.set({'n', 'v'}, '<Leader>p', '"+p', { desc = 'paste from system register' })
 
+-- ########################################
+-- ####    TOGGLETERM/LAZYGIT SETUP    ####
+-- ########################################
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction='float' })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
