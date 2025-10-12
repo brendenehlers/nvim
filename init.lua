@@ -5,9 +5,16 @@ require('oil').setup()
 -- map leader to space
 vim.g.mapLeader = ' '
 
+-- ##########################
+-- ####   VIM OPTIONS    ####
+-- ##########################
 vim.o.relativenumber = true
 vim.o.number = true
 
+-- fold settings
+vim.o.foldenable = true
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- ###############################
 -- ####    KEYMAP SETTINGS    ####
@@ -18,6 +25,9 @@ vim.keymap.set('n', '<Leader>t', '<CMD>Oil --float<CR>', { desc = 'open oil in a
 vim.keymap.set('v', '<Leader>y', '"+y', { desc = 'yank into system register' })
 vim.keymap.set('v', '<Leader>x', '"+x', { desc = 'cut into system register' })
 vim.keymap.set({'n', 'v'}, '<Leader>p', '"+p', { desc = 'paste from system register' })
+
+-- fold keymap
+vim.keymap.set('n', 'ff', 'za', { desc = 'toggle fold' })
 
 -- ########################################
 -- ####    TOGGLETERM/LAZYGIT SETUP    ####
