@@ -27,7 +27,7 @@ vim.keymap.set('v', '<Leader>x', '"+x', { desc = 'cut into system register' })
 vim.keymap.set({'n', 'v'}, '<Leader>p', '"+p', { desc = 'paste from system register' })
 
 -- fold keymap
-vim.keymap.set('n', 'ff', 'za', { desc = 'toggle fold' })
+vim.keymap.set('n', 'zz', 'za', { desc = 'toggle fold' })
 
 -- ########################################
 -- ####    TOGGLETERM/LAZYGIT SETUP    ####
