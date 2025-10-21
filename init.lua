@@ -29,6 +29,15 @@ vim.keymap.set({'n', 'v'}, '<Leader>p', '"+p', { desc = 'paste from system regis
 -- fold keymap
 vim.keymap.set('n', 'zz', 'za', { desc = 'toggle fold' })
 
+-- auto-close keymaps
+vim.keymap.set('i', '(<Tab>', '()<Left>')
+vim.keymap.set('i', '[<Tab>', '[]<Left>')
+vim.keymap.set('i', '{<Tab>', '{}<Left>')
+vim.keymap.set('i', '\'<Tab>', '\'\'<Left>')
+vim.keymap.set('i', '"<Tab>', '""<Left>')
+vim.keymap.set('i', '{<CR>', '{<CR>}<ESC>O')
+vim.keymap.set('i', '{;<CR>', '{<CR>};<ESC>O')
+
 -- ########################################
 -- ####    TOGGLETERM/LAZYGIT SETUP    ####
 -- ########################################
