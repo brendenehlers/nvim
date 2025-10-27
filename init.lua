@@ -1,6 +1,7 @@
 require('config.lazy')
 require('lualine').setup()
 require('oil').setup()
+require("autoclose").setup()
 
 -- map leader to space
 vim.g.mapLeader = ' '
@@ -29,21 +30,6 @@ vim.keymap.set({'n', 'v'}, '<Leader>p', '"+p', { desc = 'paste from system regis
 -- fold keymap
 vim.keymap.set('n', 'zz', 'za', { desc = 'toggle fold' })
 
--- auto-close keymaps
-vim.keymap.set('i', '(<Tab>', '()<Left>')
-vim.keymap.set('i', '[<Tab>', '[]<Left>')
-vim.keymap.set('i', '{<Tab>', '{}<Left>')
-vim.keymap.set('i', '\'<Tab>', '\'\'<Left>')
-vim.keymap.set('i', '"<Tab>', '""<Left>')
-vim.keymap.set('i', '{<CR>', '{<CR>}<ESC>O')
-vim.keymap.set('i', '{;<CR>', '{<CR>};<ESC>O')
-
--- #####################################
--- ####    LANGUAGE SERVER SETUP    ####
--- #####################################
-
--- integrate language server with nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 
 local function setupLsp(name)
