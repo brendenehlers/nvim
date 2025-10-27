@@ -29,7 +29,13 @@ vim.keymap.set({'n', 'v'}, '<Leader>p', '"+p', { desc = 'paste from system regis
 
 -- fold keymap
 vim.keymap.set('n', 'zz', 'za', { desc = 'toggle fold' })
+--
+-- #####################################
+-- ####    LANGUAGE SERVER SETUP    ####
+-- #####################################
 
+-- integrate language server with nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 
 local function setupLsp(name)
