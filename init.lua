@@ -46,10 +46,11 @@ end
 local lsps = {
 	'lua_ls',
 	'rust_analyzer',
-	'java_language_server',
+	'jdtls',
 	'kotlin_lsp',
 	'gradle_ls',
 	'sqlls',
+	'ts_ls',
 }
 for _, lsp in ipairs(lsps) do
 	setupLsp(lsp)
