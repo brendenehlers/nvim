@@ -38,14 +38,31 @@ vim.keymap.set('i', '"<Tab>', '""<Left>')
 vim.keymap.set('i', '{<CR>', '{<CR>}<ESC>O')
 vim.keymap.set('i', '{;<CR>', '{<CR>};<ESC>O')
 
+-- #####################################
+-- ####    LANGUAGE SERVER SETUP    ####
+-- #####################################
+
+-- https://github.com/neovim/nvim-lspconfig/tree/master
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('rust_analyzer')
+
+vim.diagnostic.config({
+	update_in_insert = true,
+	-- virtual_text = true, -- less verbose
+	virtual_lines = true,
+})
+
 -- ########################################
 -- ####    TOGGLETERM/LAZYGIT SETUP    ####
 -- ########################################
 local Terminal  = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction='float' })
 
-function _lazygit_toggle()
+function Lazygit_toggle()
   lazygit:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua Lazygit_toggle()<CR>", {noremap = true, silent = true})
+
+
+
