@@ -51,8 +51,17 @@ local function setupLsp(name)
 end
 
 -- https://github.com/neovim/nvim-lspconfig/tree/master
-setupLsp('lua_ls')
-setupLsp('rust_analyzer')
+local lsps = {
+	'lua_ls',
+	'rust_analyzer',
+	'java_language_server',
+	'kotlin_lsp',
+	'gradle_ls',
+	'sqlls',
+}
+for _, lsp in ipairs(lsps) do
+	setupLsp(lsp)
+end
 
 vim.diagnostic.config({
 	update_in_insert = true,
