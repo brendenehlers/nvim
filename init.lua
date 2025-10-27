@@ -14,7 +14,7 @@ vim.o.number = true
 -- fold settings
 vim.o.foldenable = true
 vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
 
 -- ###############################
 -- ####    KEYMAP SETTINGS    ####
@@ -42,14 +42,22 @@ vim.keymap.set('i', '{;<CR>', '{<CR>};<ESC>O')
 -- ####    LANGUAGE SERVER SETUP    ####
 -- #####################################
 
+-- integrate language server with nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
+
+local function setupLsp(name)
+	lspconfig[name].setup { capabilities = capabilities }
+end
+
 -- https://github.com/neovim/nvim-lspconfig/tree/master
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('rust_analyzer')
+setupLsp('lua_ls')
+setupLsp('rust_analyzer')
 
 vim.diagnostic.config({
 	update_in_insert = true,
-	-- virtual_text = true, -- less verbose
-	virtual_lines = true,
+	virtual_text = true, -- less verbose
+	-- virtual_lines = true,
 })
 
 -- ########################################
@@ -63,6 +71,4 @@ function Lazygit_toggle()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua Lazygit_toggle()<CR>", {noremap = true, silent = true})
-
-
 
