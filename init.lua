@@ -1,7 +1,7 @@
 require('config.lazy')
 require('lualine').setup()
 require('oil').setup()
-require("autoclose").setup()
+require('autoclose').setup()
 
 -- map leader to space
 vim.g.mapLeader = ' '
@@ -47,11 +47,16 @@ local lsps = {
 	'lua_ls',
 	'rust_analyzer',
 	'jdtls',
-	'kotlin_lsp',
+	-- 'kotlin_lsp', -- TODO doesn't work for some reason
 	'gradle_ls',
 	'sqlls',
 	'ts_ls',
+	'bashls',
 }
+require('mason-lspconfig').setup({
+	automatic_enable = true,
+	ensure_installed = lsps,
+})
 for _, lsp in ipairs(lsps) do
 	setupLsp(lsp)
 end
