@@ -30,6 +30,11 @@ vim.keymap.set({'n', 'v'}, '<Leader>p', '"+p', { desc = 'paste from system regis
 -- fold keymap
 vim.keymap.set('n', 'zz', 'za', { desc = 'toggle fold' })
 
+-- fzf keymap
+-- source: https://github.com/junegunn/fzf.vim
+vim.keymap.set('n', '<Leader>f', "<cmd>Files<CR>", { desc = 'list files' })
+vim.keymap.set('n', '<Leader>b', "<cmd>Buffers<CR>", { desc = 'list files' })
+
 -- #####################################
 -- ####    LANGUAGE SERVER SETUP    ####
 -- #####################################
