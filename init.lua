@@ -59,7 +59,7 @@ local lsps = {
 	'bashls',
 }
 require('mason-lspconfig').setup({
-	automatic_enable = true,
+	automatic_enable = false,
 	ensure_installed = lsps,
 })
 for _, lsp in ipairs(lsps) do
