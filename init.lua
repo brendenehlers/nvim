@@ -1,4 +1,5 @@
-require('config.lazy')
+require('config.lazy') -- THIS MUST BE FIRST
+
 require('lualine').setup()
 require('oil').setup()
 require('autoclose').setup()
@@ -39,12 +40,14 @@ require("noice").setup({
     }
 })
 
--- map leader to space
-vim.g.mapLeader = ' '
-
 -- ##########################
 -- ####   VIM OPTIONS    ####
 -- ##########################
+
+-- map leader to space
+vim.g.mapLeader = ' '
+
+-- line numbers
 vim.o.relativenumber = true
 vim.o.number = true
 
@@ -81,9 +84,36 @@ vim.keymap.set('n', '<Leader>b', '<cmd>Buffers<CR>', { desc = 'list files' })
 -- ####    LANGUAGE SERVER SETUP    ####
 -- #####################################
 
+local lspconfig = require('lspconfig')
 -- integrate language server with nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
+
+local cmp = require('cmp')
+cmp.setup({
+	snippet = {
+		-- REQUIRED - you must specify a snippet engine
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+		end,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	mapping = cmp.mapping.preset.insert({
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.abort(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+	}),
+	sources = cmp.config.sources({
+		{ name = 'path' },
+		{ name = 'nvim_lsp' },
+		{ name = 'buffer' },
+		{ name = 'luasnip' }, -- For luasnip users.
+	}),
+})
 
 local function setupLsp(name)
     lspconfig[name].setup { capabilities = capabilities }
@@ -100,18 +130,14 @@ local lsps = {
     'ts_ls',
     'bashls',
 }
-require('mason-lspconfig').setup({
-    automatic_enable = false,
-    ensure_installed = lsps,
-})
 for _, lsp in ipairs(lsps) do
     setupLsp(lsp)
 end
 
 vim.diagnostic.config({
     update_in_insert = true,
-    virtual_text = true, -- less verbose
-    -- virtual_lines = true,
+    -- virtual_text = true, -- less verbose
+    virtual_lines = true,
     severity_sort = true,
 })
 
