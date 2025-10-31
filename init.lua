@@ -116,7 +116,11 @@ cmp.setup({
 })
 
 local function setupLsp(name)
-    lspconfig[name].setup { capabilities = capabilities }
+	if (name == "kotlin_lsp") then
+		vim.lsp.enable(name)
+	else
+		lspconfig[name].setup { capabilities = capabilities }
+	end
 end
 
 -- https://github.com/neovim/nvim-lspconfig/tree/master
@@ -124,7 +128,8 @@ local lsps = {
     'lua_ls',
     'rust_analyzer',
     'jdtls',
-    -- 'kotlin_lsp', -- TODO doesn't work for some reason
+	-- 'kotlin_language_server', -- deprecated, don't use
+	'kotlin_lsp',
     'gradle_ls',
     'sqlls',
     'ts_ls',
