@@ -149,6 +149,12 @@ vim.diagnostic.config({
 -- ########################################
 -- ####    TOGGLETERM/LAZYGIT SETUP    ####
 -- ########################################
+require('toggleterm').setup {
+	open_mapping = "<Leader><Esc>",
+	insert_mappings  = false,
+	direction = "float",
+}
+
 local Terminal  = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction='float' })
 
