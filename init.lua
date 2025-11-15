@@ -116,7 +116,11 @@ cmp.setup({
 })
 
 local function setupLsp(name)
-	if (name == "kotlin_lsp") then
+	if (
+		name == "kotlin_lsp" or
+		name == "docker_language_server" or
+		name == "gitlab_ci_ls"
+	) then
 		vim.lsp.enable(name)
 	else
 		lspconfig[name].setup { capabilities = capabilities }
@@ -127,6 +131,7 @@ end
 local lsps = {
     'lua_ls',
     'rust_analyzer',
+	'gitlab_ci_ls',
     'jdtls',
 	-- 'kotlin_language_server', -- deprecated, don't use
 	'kotlin_lsp',
@@ -134,6 +139,9 @@ local lsps = {
     'sqlls',
     'ts_ls',
     'bashls',
+	'docker_language_server',
+	'yamlls',
+	'gopls',
 }
 for _, lsp in ipairs(lsps) do
     setupLsp(lsp)
